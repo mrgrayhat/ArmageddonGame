@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Armageddon.ConsoleApp", "Armageddon.ConsoleApp\Armageddon.ConsoleApp.csproj", "{53D6A0DC-8B2E-4288-9861-5F72B6A33D9B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cores", "Cores", "{1F2796AD-142C-4859-B461-F13CA4B221B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Armageddon.Models", "Armageddon.Models\Armageddon.Models.csproj", "{7FACA885-F21D-458A-9812-37AAC3314F15}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GamePlatforms", "GamePlatforms", "{28536848-A543-4F17-B8AB-D435231118A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{37E73E85-A2AF-48CC-B20A-54C6FB7DF3AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Armageddon.DataAccessLayer", "Armageddon.DataAccessLayer\Armageddon.DataAccessLayer.csproj", "{E4450F7D-8CAD-4364-A020-EC447282A168}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Armageddon.Shared", "Armageddon.Shared\Armageddon.Shared.csproj", "{9B9A8EFD-8690-486D-9893-0656818F4EEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53D6A0DC-8B2E-4288-9861-5F72B6A33D9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53D6A0DC-8B2E-4288-9861-5F72B6A33D9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53D6A0DC-8B2E-4288-9861-5F72B6A33D9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53D6A0DC-8B2E-4288-9861-5F72B6A33D9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FACA885-F21D-458A-9812-37AAC3314F15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FACA885-F21D-458A-9812-37AAC3314F15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FACA885-F21D-458A-9812-37AAC3314F15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FACA885-F21D-458A-9812-37AAC3314F15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4450F7D-8CAD-4364-A020-EC447282A168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4450F7D-8CAD-4364-A020-EC447282A168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4450F7D-8CAD-4364-A020-EC447282A168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4450F7D-8CAD-4364-A020-EC447282A168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B9A8EFD-8690-486D-9893-0656818F4EEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B9A8EFD-8690-486D-9893-0656818F4EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B9A8EFD-8690-486D-9893-0656818F4EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B9A8EFD-8690-486D-9893-0656818F4EEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{53D6A0DC-8B2E-4288-9861-5F72B6A33D9B} = {28536848-A543-4F17-B8AB-D435231118A6}
+		{7FACA885-F21D-458A-9812-37AAC3314F15} = {1F2796AD-142C-4859-B461-F13CA4B221B1}
+		{E4450F7D-8CAD-4364-A020-EC447282A168} = {1F2796AD-142C-4859-B461-F13CA4B221B1}
+		{9B9A8EFD-8690-486D-9893-0656818F4EEE} = {1F2796AD-142C-4859-B461-F13CA4B221B1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F44B4A33-B8FC-4064-A11F-D19A7884413D}
+	EndGlobalSection
+EndGlobal
