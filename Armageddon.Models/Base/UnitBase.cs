@@ -70,7 +70,7 @@ namespace Armageddon.Models.Base
             {
                 //if (_damageTaken < _defenseArmor) return;
                 // a percent damage based on armor
-                _damageTaken = value * (_defenseArmor * 0.01d);
+                _damageTaken = value - (value * (_defenseArmor * 0.01d));
                 Health -= _damageTaken;
             }
         }

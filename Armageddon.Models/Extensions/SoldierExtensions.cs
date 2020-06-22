@@ -14,43 +14,43 @@ namespace Armageddon.Models.Extensions
 
         public static long GetUnitsPopulation(this Soldier soldiers)
         {
-            long count = 0;
-            try
-            {
-                foreach (var item in soldiers.UnitsDictionary.Values)
-                {
-                    count += item.Count;
-                }
-            }
-            catch (Exception getUnitsPopulationEx)
-            {
-                Console.WriteLine("GetUnitsPopulation error, " + getUnitsPopulationEx);
-            }
-            return count;
+            return soldiers.Count;
         }
 
         public static string GetSoldiersInformation(this Soldier soldiers)
         {
-            List<UnitBase> infantriesList = new List<UnitBase>();
+            //List<UnitBase> infantriesList;
             StringBuilder stringBuilder = new StringBuilder();
             try
             {
-                _ = soldiers.UnitsDictionary.TryGetValue(UnitTypesEnum.BasicInfantry, out infantriesList);
 
-                foreach (var unit in infantriesList)
+                foreach (var unit in soldiers.GetAll())
                 {
                     stringBuilder.AppendLine($"Id: {unit.ID}, name: {unit.Name}, type: {unit.UnitType}, health: {unit.Health}, attack damage: {unit.AttackDamage}, DefenseArmor: {unit.DefenseArmor}, Damage Taken: {unit.DamageTaken}, attack speed: {unit.AttackSpeed}, Cost: {unit.Cost}");
                 }
-                stringBuilder.AppendLine(
-                    $"-Total Basic soldiers, {infantriesList[0].UnitType} : {infantriesList.Count}");
-                infantriesList.Clear();
-                _ = soldiers.UnitsDictionary.TryGetValue(UnitTypesEnum.AdvancedInfantry, out infantriesList);
-                foreach (var unit in infantriesList)
+
+                foreach (UnitTypesEnum unitTypesEnum in Enum.GetValues(typeof(UnitTypesEnum)))
                 {
-                    stringBuilder.AppendLine($"Id: {unit.ID}, name: {unit.Name}, type: {unit.UnitType}, health: {unit.Health}, attack damage{unit.AttackDamage}, DefenseArmor: {unit.DefenseArmor}, Damage Taken: {unit.DamageTaken}, attack speed: {unit.AttackSpeed}, Cost: {unit.Cost}");
+                    stringBuilder.AppendLine(
+                   $"-Total Basic soldiers, {unitTypesEnum} : {soldiers.GetUnitsCount(unitTypesEnum)}");
                 }
-                stringBuilder.AppendLine(
-                    $"-Total Advanced soldiers, {infantriesList[0].UnitType} : {infantriesList.Count}");
+
+                //soldiers.TryGetUnits(UnitTypesEnum.BasicInfantry, out infantriesList);
+
+                //foreach (var unit in infantriesList)
+                //{
+                //    stringBuilder.AppendLine($"Id: {unit.ID}, name: {unit.Name}, type: {unit.UnitType}, health: {unit.Health}, attack damage: {unit.AttackDamage}, DefenseArmor: {unit.DefenseArmor}, Damage Taken: {unit.DamageTaken}, attack speed: {unit.AttackSpeed}, Cost: {unit.Cost}");
+                //}
+                //stringBuilder.AppendLine(
+                //    $"-Total Basic soldiers, {infantriesList[0].UnitType} : {infantriesList.Count}");
+
+                //soldiers.TryGetUnits(UnitTypesEnum.AdvancedInfantry, out infantriesList);
+                //foreach (var unit in infantriesList)
+                //{
+                //    stringBuilder.AppendLine($"Id: {unit.ID}, name: {unit.Name}, type: {unit.UnitType}, health: {unit.Health}, attack damage{unit.AttackDamage}, DefenseArmor: {unit.DefenseArmor}, Damage Taken: {unit.DamageTaken}, attack speed: {unit.AttackSpeed}, Cost: {unit.Cost}");
+                //}
+                //stringBuilder.AppendLine(
+                //    $"-Total Advanced soldiers, {infantriesList[0].UnitType} : {infantriesList.Count}");
                 stringBuilder.AppendLine($"-Total Units: {soldiers.GetUnitsPopulation()}");
             }
             catch (Exception ex)

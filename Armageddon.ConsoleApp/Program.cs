@@ -23,7 +23,7 @@ namespace Armageddon.ConsoleApp
         static void PrintGameBanner()
         {
             Console.WriteLine("Hi, Welcome To Armageddon Game!", Console.ForegroundColor = ConsoleColor.Green);
-        TeamMenu:
+            TeamMenu:
             #region Menu
             Console.WriteLine("---------------------------");
             Console.WriteLine("Please Choose You'r Team:", Console.ForegroundColor = ConsoleColor.Green);
@@ -130,22 +130,26 @@ namespace Armageddon.ConsoleApp
                 List<UnitBase> unitsList = new List<UnitBase>();
                 PlayerBase player = new PlayerBase(nickName: "saeed", soldiers: new Soldier());
 
-                player.Soldiers.UnitsDictionary.Add(UnitTypesEnum.BasicInfantry, new List<UnitBase>
-                {
-                    new BasicInfantry(),
-                    new BasicInfantry(),
-                    new BasicInfantry()
-                });
-                player.Soldiers.UnitsDictionary.Add(UnitTypesEnum.AdvancedInfantry, new List<UnitBase>
-                {
-                    new AdvancedInfantry(),
-                    new AdvancedInfantry(),
-                });
+                player.Soldiers.AddUnit(UnitTypesEnum.BasicInfantry, new BasicInfantry());
+                player.Soldiers.AddUnit(UnitTypesEnum.BasicInfantry, new BasicInfantry());
+                player.Soldiers.AddUnit(UnitTypesEnum.BasicInfantry, new BasicInfantry());
 
-                player.Soldiers.UnitsDictionary.TryGetValue(UnitTypesEnum.BasicInfantry, out unitsList);
+                player.Soldiers.AddUnit(UnitTypesEnum.AdvancedInfantry, new AdvancedInfantry());
+                player.Soldiers.AddUnit(UnitTypesEnum.AdvancedInfantry, new AdvancedInfantry());
+
+
+                player.Soldiers.TryGetUnits(UnitTypesEnum.BasicInfantry, out unitsList);
+
                 Console.WriteLine(player.Soldiers.GetSoldiersInformation());
 
                 Console.WriteLine($"[{DateTime.Now}]", Console.ForegroundColor = ConsoleColor.Magenta);
+
+                player.Soldiers.GetUnit(UnitTypesEnum.BasicInfantry, 0).TakeDamage(10);
+
+                player.Soldiers.GetUnit(UnitTypesEnum.AdvancedInfantry, 0).TakeDamage(60);
+
+                Console.WriteLine("---------------");
+                Console.WriteLine(player.Soldiers.GetSoldiersInformation());
 
             }
             catch (Exception initEx)
