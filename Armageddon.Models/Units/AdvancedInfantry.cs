@@ -1,4 +1,5 @@
 ﻿using Armageddon.Models.Base;
+using Armageddon.Models.Base.Types;
 
 namespace Armageddon.Models.Units
 {

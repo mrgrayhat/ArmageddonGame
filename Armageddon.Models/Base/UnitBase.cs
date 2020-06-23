@@ -1,14 +1,18 @@
 ﻿using System;
 using Armageddon.Models.Base.Interfaces;
+using Armageddon.Models.Base.Types;
+using Armageddon.Models.Extensions;
 
 namespace Armageddon.Models.Base
 {
     /// <summary>
-    /// base class for all unit's available the game.
+    /// base class for all of the unit's in the game.
     /// </summary>
     public abstract class UnitBase : IUnitBase
     {
+
         #region Private Fields
+        // unit fields and some default values
 
         private long _id = Guid.NewGuid().ToByteArray().GetHashCode();
         private double _damageTaken = 0d;
@@ -17,13 +21,15 @@ namespace Armageddon.Models.Base
         private double _defenseArmor = 1d;
         private double _cost = 0d;
         private bool _isEnabled = true;
+        private bool _isAlive = true;
         private double _attackDamage = 1d;
         private double _health = 50d;
         private string _name;
         private UnitTypesEnum _unitType;
 
         #endregion
-
+        
+        
         #region Public Properties
 
         /// <summary>
@@ -48,12 +54,24 @@ namespace Armageddon.Models.Base
             set { _unitType = value; }
         }
         /// <summary>
-        /// unit health
+        /// Unit Health/Life. 
+        /// if the value is negative, it becomes Zero(0)
         /// </summary>
         public double Health
         {
             get { return _health; }
-            set { _health = value; }
+            set
+            {
+                // if the value is negative, it becomes Zero(0).
+                // (for example more damage than unit health)
+
+                if (Math.Max(0, value) == 0)
+                {
+                    _isAlive = false;
+                    _health = 0; return;
+                }
+                _health = value;
+            }
         }
         public double AttackDamage
         {
@@ -68,7 +86,6 @@ namespace Armageddon.Models.Base
             get { return _damageTaken; }
             set
             {
-                //if (_damageTaken < _defenseArmor) return;
                 // a percent damage based on armor
                 _damageTaken = value - (value * (_defenseArmor * 0.01d));
                 Health -= _damageTaken;
@@ -81,7 +98,12 @@ namespace Armageddon.Models.Base
         {
             get
             {
-                return _damageTaken <= _health;
+                //_isAlive = _damageTaken < _health;
+                return _isAlive;
+            }
+            set
+            {
+                _isAlive = value;
             }
         }
         /// <summary>
@@ -146,13 +168,6 @@ namespace Armageddon.Models.Base
             CriticalAttackChance = criticalAttackChance;
             Cost = cost;
             IsEnabled = isEnabled;
-        }
-
-        public UnitBase(string name, double cost, UnitTypesEnum unitType)
-        {
-            Name = name;
-            Cost = cost;
-            UnitType = unitType;
         }
 
         #endregion

@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Armageddon.Models.Base;
+using Armageddon.Models.Base.Types;
 
 namespace Armageddon.Models.Game
 {
     public class Soldier
     {
-        Dictionary<UnitTypesEnum, List<UnitBase>> UnitsDictionary = new Dictionary<UnitTypesEnum, List<UnitBase>>();
-        List<UnitBase> AllUnits { get; set; } = new List<UnitBase>();
+        static Dictionary<UnitTypesEnum, List<UnitBase>> UnitsDictionary = new Dictionary<UnitTypesEnum, List<UnitBase>>();
+        public static List<UnitBase> AllUnits { get; set; } = new List<UnitBase>();
 
         public Soldier() : base()
         {
@@ -24,6 +26,15 @@ namespace Armageddon.Models.Game
             {
                 return AllUnits.Count;
             }
+        }
+
+        public static void RemoveUnit(UnitTypesEnum unitTypesEnum, UnitBase unit)
+        {
+            if (UnitsDictionary.TryGetValue(unitTypesEnum, out List<UnitBase> items))
+            {
+                items.Remove(unit);
+            }
+            AllUnits.Remove(unit);
         }
 
         public void AddUnit(UnitTypesEnum unitTypesEnum, UnitBase unit)
@@ -49,16 +60,21 @@ namespace Armageddon.Models.Game
 
         public int GetUnitsCount(UnitTypesEnum unitTypesEnum)
         {
-            if (UnitsDictionary.TryGetValue(unitTypesEnum, out List<UnitBase> units))
-                return units.Count;
-            return 0;
+            // try get unit's count or return 0
+            return UnitsDictionary.TryGetValue(unitTypesEnum, out List<UnitBase> units) ? units.Count : 0;
         }
-        
 
         public UnitBase GetUnit(UnitTypesEnum unitTypesEnum, int index)
         {
-            if (UnitsDictionary.TryGetValue(unitTypesEnum, out List<UnitBase> units))
-                return units[index];
+            try
+            {
+                if (UnitsDictionary.TryGetValue(unitTypesEnum, out List<UnitBase> units))
+                    return units[index];
+            }
+            catch (Exception ex)
+            {
+
+            }
             return null;
         }
     }

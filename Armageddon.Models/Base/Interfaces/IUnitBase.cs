@@ -1,5 +1,10 @@
-﻿namespace Armageddon.Models.Base.Interfaces
+﻿using Armageddon.Models.Base.Types;
+
+namespace Armageddon.Models.Base.Interfaces
 {
+    /// <summary>
+    /// Interface For UnitBase Class
+    /// </summary>
     public interface IUnitBase
     {
 

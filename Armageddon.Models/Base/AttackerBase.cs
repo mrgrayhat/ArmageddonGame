@@ -2,14 +2,15 @@
 
 namespace Armageddon.Models.Base
 {
+    /// <summary>
+    /// all unit's who can attack uses this
+    /// </summary>
     public abstract class AttackerBase : GunBase, IAttackerBase
     {
 
-        //Dictionary<UnitTypesEnum, UnitBase> UnitsDictionary = new Dictionary<UnitTypesEnum, UnitBase>();
+        public AttackerBase() : base()
+        {
 
-        //public AttackerBase() : base()
-        //{
-        //    AttackDamage = AttackDamage + GunDammage;
-        //}
+        }
     }
 }

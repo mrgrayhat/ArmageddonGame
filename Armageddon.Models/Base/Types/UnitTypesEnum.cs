@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Armageddon.Models.Base
+namespace Armageddon.Models.Base.Types
 {
     [Flags]
     public enum UnitTypesEnum

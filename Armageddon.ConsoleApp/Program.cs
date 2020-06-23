@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Armageddon.Models.Base;
-using Armageddon.Models.Base.Interfaces;
 using Armageddon.Models.Extensions;
 using Armageddon.Models.Game;
+using Armageddon.Models.Base.Types;
 using Armageddon.Models.Units;
 
 namespace Armageddon.ConsoleApp
@@ -14,16 +14,16 @@ namespace Armageddon.ConsoleApp
         static void Main(string[] args)
         {
 
-            PrintGameBanner();
+            PrintGameMenu();
 
             Console.ReadKey(true);
 
         }
 
-        static void PrintGameBanner()
+        static void PrintGameMenu()
         {
             Console.WriteLine("Hi, Welcome To Armageddon Game!", Console.ForegroundColor = ConsoleColor.Green);
-            TeamMenu:
+        TeamMenu:
             #region Menu
             Console.WriteLine("---------------------------");
             Console.WriteLine("Please Choose You'r Team:", Console.ForegroundColor = ConsoleColor.Green);
@@ -60,95 +60,81 @@ namespace Armageddon.ConsoleApp
 
             return Task.CompletedTask;
         }
-
+        /// <summary>
+        /// simple and test starter for game
+        /// </summary>
+        /// <param name="team"></param>
+        /// <returns></returns>
         static Task InitializeTest(byte team)
         {
             try
             {
-
-                #region old method
-                //PlayerBase playerBase = new PlayerBase("saeed",
-                //    new Soldiers
-                //    {
-                //        BasicInfantries = new List<BasicInfantry>
-                //        {
-                //            new BasicInfantry
-                //            {
-                //                Name = "basic soldier 1",
-                //                Cost = 500
-                //            },
-                //            new BasicInfantry
-                //            {
-                //                Name = "basic soldier 2",
-                //                Cost = 500
-                //            },
-                //            new BasicInfantry
-                //            {
-                //                Name = "basic soldier 3",
-                //                Cost = 500
-                //            }
-                //        },
-                //        AdvancedInfantries = new List<AdvancedInfantry>
-                //        {
-                //            new AdvancedInfantry
-                //            {
-                //                Name = "adv soldier 1",
-                //                Cost = 1000
-                //            },
-                //            new AdvancedInfantry
-                //            {
-                //                Name = "adv soldier 2",
-                //                Cost = 1000
-                //            },
-                //            new AdvancedInfantry
-                //            {
-                //                Name = "adv soldier 3",
-                //                Cost = 1000
-                //            }
-                //        }
-                //    });
-
-                //Console.WriteLine($"[{DateTime.Now}]", Console.ForegroundColor = ConsoleColor.Magenta);
-                //// get soldiers information using an extension method
-                //Console.WriteLine("Tactical Info:\n" + playerBase.Soldiers.GetSoldiersInformation(), Console.ForegroundColor = ConsoleColor.Yellow);
-                //// do a simple damage
-                //playerBase.Soldiers.BasicInfantries[0].TakeDamage(15);
-                //playerBase.Soldiers.BasicInfantries[1].TakeDamage(50);
-
-                //playerBase.Soldiers.AdvancedInfantries[0].TakeDamage(5);
-                //playerBase.Soldiers.AdvancedInfantries[1].TakeDamage(60);
-                //playerBase.Soldiers.AdvancedInfantries[2].TakeDamage(100);
-                //// set a short delay and get updates
-                //Task.Delay(2000).GetAwaiter().GetResult();
-                //Console.WriteLine($"[{DateTime.Now}]", Console.ForegroundColor = ConsoleColor.Magenta);
-                //Console.WriteLine("Tactical Info:\n" + playerBase.Soldiers.GetSoldiersInformation(), Console.ForegroundColor = ConsoleColor.Yellow);
-                #endregion
-
                 Console.WriteLine($"You'r Team is {(team == 1 ? "Blue" : "Red")}", Console.ForegroundColor = (team == 1 ? ConsoleColor.Blue : ConsoleColor.Red));
                 Console.ResetColor();
 
+                // player unit's list
                 List<UnitBase> unitsList = new List<UnitBase>();
                 PlayerBase player = new PlayerBase(nickName: "saeed", soldiers: new Soldier());
 
+                // add some simple units
+                // add some basic infantries
                 player.Soldiers.AddUnit(UnitTypesEnum.BasicInfantry, new BasicInfantry());
                 player.Soldiers.AddUnit(UnitTypesEnum.BasicInfantry, new BasicInfantry());
                 player.Soldiers.AddUnit(UnitTypesEnum.BasicInfantry, new BasicInfantry());
-
+                // add some advanced infantries
                 player.Soldiers.AddUnit(UnitTypesEnum.AdvancedInfantry, new AdvancedInfantry());
                 player.Soldiers.AddUnit(UnitTypesEnum.AdvancedInfantry, new AdvancedInfantry());
+                player.Soldiers.AddUnit(UnitTypesEnum.AdvancedInfantry, new AdvancedInfantry());
 
-
+                // send this type of unit's to a ref list
                 player.Soldiers.TryGetUnits(UnitTypesEnum.BasicInfantry, out unitsList);
 
+                // get all soldier's information, such as health, damage, name, id and etc...
+                Console.WriteLine($"[{DateTime.Now}]", Console.ForegroundColor = ConsoleColor.Magenta);
+                Console.ResetColor();
                 Console.WriteLine(player.Soldiers.GetSoldiersInformation());
 
-                Console.WriteLine($"[{DateTime.Now}]", Console.ForegroundColor = ConsoleColor.Magenta);
-
+                // simulate attacking to units' (to test armor and health calculations and reports)
+                // And we get a notification for everyone who gets hurt
                 player.Soldiers.GetUnit(UnitTypesEnum.BasicInfantry, 0).TakeDamage(10);
+                player.Soldiers.GetUnit(UnitTypesEnum.BasicInfantry, 1).TakeDamage(20);
 
-                player.Soldiers.GetUnit(UnitTypesEnum.AdvancedInfantry, 0).TakeDamage(60);
+                player.Soldiers.GetUnit(UnitTypesEnum.BasicInfantry, 2).TakeDamage(20);
+                player.Soldiers.GetUnit(UnitTypesEnum.BasicInfantry, 2).TakeDamage(20);
+                player.Soldiers.GetUnit(UnitTypesEnum.BasicInfantry, 2).TakeDamage(25);
 
-                Console.WriteLine("---------------");
+                player.Soldiers.GetUnit(UnitTypesEnum.AdvancedInfantry, 0).TakeDamage(10);
+                player.Soldiers.GetUnit(UnitTypesEnum.AdvancedInfantry, 1).TakeDamage(20);
+                player.Soldiers.GetUnit(UnitTypesEnum.AdvancedInfantry, 2).TakeDamage(50);
+                player.Soldiers.GetUnit(UnitTypesEnum.AdvancedInfantry, 2).TakeDamage(100);
+
+                // refresh information
+                Console.WriteLine($"[{DateTime.Now}]", Console.ForegroundColor = ConsoleColor.Magenta);
+                Console.ResetColor();
+                Console.WriteLine(player.Soldiers.GetSoldiersInformation());
+
+                // repeat attack simulation
+
+                //player.Soldiers.GetUnit(UnitTypesEnum.BasicInfantry, 0).TakeDamage(30);
+                //player.Soldiers.GetUnit(UnitTypesEnum.BasicInfantry, 1).TakeDamage(40);
+
+                //player.Soldiers.GetUnit(UnitTypesEnum.BasicInfantry, 2).TakeDamage(20);
+                //player.Soldiers.GetUnit(UnitTypesEnum.BasicInfantry, 2).TakeDamage(20);
+                //player.Soldiers.GetUnit(UnitTypesEnum.BasicInfantry, 2).TakeDamage(25);
+
+                //player.Soldiers.GetUnit(UnitTypesEnum.AdvancedInfantry, 0).TakeDamage(10);
+                //player.Soldiers.GetUnit(UnitTypesEnum.AdvancedInfantry, 1).TakeDamage(20);
+                //player.Soldiers.GetUnit(UnitTypesEnum.AdvancedInfantry, 2).TakeDamage(50);
+                //player.Soldiers.GetUnit(UnitTypesEnum.AdvancedInfantry, 2).TakeDamage(100);
+
+                // refresh information
+                Console.WriteLine($"[{DateTime.Now}]", Console.ForegroundColor = ConsoleColor.Magenta);
+                Console.ResetColor();
+
+
+
+                Console.WriteLine("--------------------");
+                // get soldier's info again, to recheck after test actions(attack..)
                 Console.WriteLine(player.Soldiers.GetSoldiersInformation());
 
             }
