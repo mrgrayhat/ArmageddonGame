@@ -57,7 +57,6 @@ namespace Armageddon.Models.Game
             UnitsDictionary.TryGetValue(unitTypesEnum, out units);
         }
 
-
         public int GetUnitsCount(UnitTypesEnum unitTypesEnum)
         {
             // try get unit's count or return 0

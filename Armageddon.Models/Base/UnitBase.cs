@@ -98,7 +98,6 @@ namespace Armageddon.Models.Base
         {
             get
             {
-                //_isAlive = _damageTaken < _health;
                 return _isAlive;
             }
             set

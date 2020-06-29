@@ -15,12 +15,12 @@ namespace Armageddon.Models.Units
             Name = "Basic Soldier";
             Health = 50;
             DefenseArmor = 2;
-            AttackDamage = 10;
+            AttackDamage = 5;
             AttackSpeed = 5;
             CriticalAttackChance = 1;
             GunType = GunTypesEnum.Pistol;
             GunDamageType = GunDamageTypesEnum.Single;
-            GunDammage = 10;
+            GunDammage = 5;
             GunAmmunition = 200;
         }
 

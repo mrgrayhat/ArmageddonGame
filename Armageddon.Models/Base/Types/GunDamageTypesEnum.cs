@@ -7,6 +7,8 @@ namespace Armageddon.Models.Base.Types
     {
         Single = 0,
         Splash = 1,
-
+        AntiArmor = 2,
+        ArtilaryCaliber = 3,
+        
     }
 }

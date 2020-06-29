@@ -15,10 +15,10 @@ namespace Armageddon.Models.Units
             Name = "Advanced Soldier";
             Health = 100;
             DefenseArmor = 5;
-            AttackDamage = 20;
+            AttackDamage = 10;
             AttackSpeed = 10;
-            CriticalAttackChance = 2;
-            GunDammage = 20;
+            CriticalAttackChance = 1.5d;
+            GunDammage = 10;
             GunAmmunition = 400;
         }
     }
